@@ -1,0 +1,61 @@
+{
+  "name": "yamadom",
+  "description": "YamaD's Virtual DOM",
+  "version": "0.1.0",
+  "author": "YamaD",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.54.0",
+    "@typescript-eslint/parser": "5.54.0",
+    "eslint": "8.35.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "prettier": "2.8.4",
+    "tsup": "6.6.3",
+    "typescript": "4.9.5"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./jsx-runtime": {
+      "import": "./dist/jsx-runtime.js",
+      "types": "./dist/jsx-runtime.d.ts"
+    },
+    "./dom": {
+      "import": "./dist/dom/index.js",
+      "types": "./dist/dom/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "packageManager": "pnpm@7.28.0",
+  "scripts": {
+    "build": "tsup --minify --dts",
+    "dev": "tsup --watch",
+    "fmt": "prettier -w src example/src",
+    "lint": "eslint src example/src"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts",
+      "src/jsx-runtime.ts",
+      "src/dom/index.ts",
+      "src/hooks/index.ts"
+    ],
+    "format": [
+      "esm"
+    ],
+    "sourcemap": true,
+    "clean": true
+  },
+  "type": "module",
+  "types": "dist/index.d.ts"
+}

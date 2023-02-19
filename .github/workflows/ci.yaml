@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: |
+            - args: [--frozen-lockfile]
+
+      - run: pnpm build
+      - run: pnpm build
+        working-directory: example
+
+      - uses: actions/configure-pages@v3
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: example/dist
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/deploy-pages@v1
+        id: deployment

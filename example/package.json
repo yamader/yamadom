@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "yamadom": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "4.1.4",
+    "vite-tsconfig-paths": "4.0.5"
+  },
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  }
+}
